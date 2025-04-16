@@ -10,19 +10,61 @@ const raidList = [
     "폭풍의 지휘관, 베히모스",
     "서막: 붉어진 백야의 나선",
 ]
-
+ const rosters = [
+     "잘익은도토리","덜익은도토리","추쌤","명배","빙글빙글스탭","빙글빙글간격","샤프테드","레디","냅무세"
+ ]
 
 function App() {
-  const [raidSelect, setRaidSelect] = useState(0)
-    useEffect(() => {
-        // axios.get("http://localhost:8080/api/v1/rosterlist")
+    const [raidSelect, setRaidSelect] = useState(0)
+    const [rosterList, setRosterList] = useState(rosters)
+    const [selectRoster, setSelectRoster] = useState(0)
+
+    useEffect( () => {
+
+        // 1. 원정대 불러오기
+        // 2. 원정대
     })
+
+    const rosterRead = async () => {
+        //const response = await axios.get("http://localhost:8080/api/v1/rosterlist")
+        // setRosterList(response.data)
+    }
+
+    const rosterSearch = async () => {
+
+    }
+
+    const rosterCreate = async (rosterName) => {
+        // isPresent = await rosterSearch(rosterName)
+        // isPresent && return null
+        // await axios.put("http://localhost:8080/api/v1/rostercreate", rosterName)
+
+    }
+
+    const rosterUpdate = () => {
+        return null
+    }
+
+    const rosterDelete = () => {
+        return null
+    }
 
     return (
       <>
-          <div>원정대 등록</div>
-          <input className={"border"}></input>
-          <button className={"hover:cursor-pointer border"}>버튼</button>
+          <div className="Roster">
+              <div>원정대 등록</div>
+              <input className={"border"}></input>
+              <button className={"hover:cursor-pointer border"}>버튼</button>
+              {rosterList.map((item, index) => {
+                  return (
+                      <div key={index}>
+                          {item}
+                      </div>
+                  )
+              })}
+              <div>
+              </div>
+          </div>
           <div>캐릭터 등록</div>
           <input className={"border"}></input>
           <button className={"hover:cursor-pointer border"}>버튼</button>
