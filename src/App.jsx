@@ -11,8 +11,29 @@ const raidList = [
     "서막: 붉어진 백야의 나선",
 ]
  const rosters = [
-     "잘익은도토리","덜익은도토리","추쌤","명배","빙글빙글스탭","빙글빙글간격","샤프테드","레디","냅무세"
+     {id:1, roster:"잘익은도토리"},
+     {id:2, roster:"덜익은도토리"},
+     {id:3, roster:"추쌤"},
+     {id:4, roster:"명배"},
+     {id:5, roster:"빙글빙글스탭"},
+     {id:6, roster:"빙글빙글간격"},
+     {id:7, roster:"샤프테드"},
+     {id:8, roster:"레디"},
+     {id:9, roster:"냅무세"}
  ]
+
+const characters = [
+    {id: 1, roster: "샤프테드", name:"지는쪽은서포터가되는걸로",class: "홀리나이트", level:1701.6, lopec:1000, zloa:1000}
+]
+
+const partyList = [
+    {
+        id: 1,
+        raidType: "강습 : 멸망의 불꽃, 타르칼",
+        members: [1,1,1,1,1,1,1,1]
+    }
+]
+
 
 function App() {
     const [raidSelect, setRaidSelect] = useState(0)
@@ -58,7 +79,7 @@ function App() {
               {rosterList.map((item, index) => {
                   return (
                       <div key={index}>
-                          {item}
+                          {item.roster}
                       </div>
                   )
               })}
