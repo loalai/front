@@ -104,71 +104,41 @@ function App() {
                   )
               })
           }
-          <div>
-              <div>레이드 인원</div>
+          <div className={"Party"}>
+              <div>파티 리스트</div>
+              {partyList.map((item, index)=>{
+                  return (
+                      <div key={index}>
+                          {item.members.map((member, index) => {
+                              const character = characters[member]
+                              return (
+                                  <div key={index}>
+                                      {<div className={"border"}>
+                                      <div className="flex justify-between">
+                                          <div></div>
+                                          <div>템랩 : {character.level}</div>
+                                      </div>
+                                      <div>
+                                          <div>{character.name}</div>
+                                      </div>
+                                      <div>
+                                          <div className={"flex justify-between"}>
+                                              <div>로펙 : {character.lopec}</div>
+                                              <div>즐로아 : {character.zloa}</div>
+                                          </div>
+                                      </div>
+                                  </div>}
+                                  </div>
+                              )
+                          })}
+                      </div>
+                  )
+              })}<div>
+
+              </div>
               <div>
                   <div>1파티</div>
                   <div className={"grid grid-cols-2 grid-rows-2 gap-4"}>
-                      <div className={"border"}>
-                          <div className="flex justify-between">
-                              <div>홀리나이트</div>
-                              <div>템랩 : 1700</div>
-                          </div>
-                          <div>
-                              <div>지는쪽은서포터가되는걸로</div>
-                          </div>
-                          <div>
-                              <div className={"flex justify-between"}>
-                                  <div>로펙 : 1000</div>
-                                  <div>즐로아 : 1000</div>
-                              </div>
-                          </div>
-                      </div>
-                      <div className={"border"}>
-                          <div className="flex justify-between">
-                              <div>홀리나이트</div>
-                              <div>템랩 : 1700</div>
-                          </div>
-                          <div>
-                              <div>지는쪽은서포터가되는걸로</div>
-                          </div>
-                          <div>
-                              <div className={"flex justify-between"}>
-                                  <div>로펙 : 1000</div>
-                                  <div>즐로아 : 1000</div>
-                              </div>
-                          </div>
-                      </div>
-                      <div className={"border"}>
-                          <div className="flex justify-between">
-                              <div>홀리나이트</div>
-                              <div>템랩 : 1700</div>
-                          </div>
-                          <div>
-                              <div>지는쪽은서포터가되는걸로</div>
-                          </div>
-                          <div>
-                              <div className={"flex justify-between"}>
-                                  <div>로펙 : 1000</div>
-                                  <div>즐로아 : 1000</div>
-                              </div>
-                          </div>
-                      </div>
-                      <div className={"border"}>
-                          <div className="flex justify-between">
-                              <div>홀리나이트</div>
-                              <div>템랩 : 1700</div>
-                          </div>
-                          <div>
-                              <div>지는쪽은서포터가되는걸로</div>
-                          </div>
-                          <div>
-                              <div className={"flex justify-between"}>
-                                  <div>로펙 : 1000</div>
-                                  <div>즐로아 : 1000</div>
-                              </div>
-                          </div>
-                      </div>
                   </div>
               </div>
           </div>
