@@ -1,5 +1,6 @@
 import './App.css'
 import {useEffect, useState} from "react";
+import axios from "axios";
 
 const raidList = [
     "강습 : 멸망의 불꽃, 타르칼",
@@ -13,7 +14,11 @@ const raidList = [
 
 function App() {
   const [raidSelect, setRaidSelect] = useState(0)
-  return (
+    useEffect(() => {
+        // axios.get("http://localhost:8080/api/v1/rosterlist")
+    })
+
+    return (
       <>
           <div>원정대 등록</div>
           <input className={"border"}></input>
