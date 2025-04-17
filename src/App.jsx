@@ -1,6 +1,7 @@
 import './App.css'
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {Roster} from "./component/roster/Roster.jsx";
 
 const raidList = [
     "강습 : 멸망의 불꽃, 타르칼",
@@ -10,21 +11,12 @@ const raidList = [
     "폭풍의 지휘관, 베히모스",
     "서막: 붉어진 백야의 나선",
 ]
- const rosters = [
-     {id:1, roster:"잘익은도토리"},
-     {id:2, roster:"덜익은도토리"},
-     {id:3, roster:"추쌤"},
-     {id:4, roster:"명배"},
-     {id:5, roster:"빙글빙글스탭"},
-     {id:6, roster:"빙글빙글간격"},
-     {id:7, roster:"샤프테드"},
-     {id:8, roster:"레디"},
-     {id:9, roster:"냅무세"}
- ]
 
-const characters = [
-    {id: 1, roster: "샤프테드", name:"지는쪽은서포터가되는걸로",class: "홀리나이트", level:1701.6, lopec:1000, zloa:1000}
-]
+
+const characters = {1:
+        {id: 1, roster: "샤프테드", name: "지는쪽은서포터가되는걸로", class: "홀리나이트", level: 1701.6, lopec: 1000, zloa: 1000}
+
+}
 
 const partyList = [
     {
@@ -37,55 +29,16 @@ const partyList = [
 
 function App() {
     const [raidSelect, setRaidSelect] = useState(0)
-    const [rosterList, setRosterList] = useState(rosters)
+
     const [selectRoster, setSelectRoster] = useState(0)
 
-    useEffect( () => {
 
-        // 1. 원정대 불러오기
-        // 2. 원정대
-    })
 
-    const rosterRead = async () => {
-        //const response = await axios.get("http://localhost:8080/api/v1/rosterlist")
-        // setRosterList(response.data)
-    }
 
-    const rosterSearch = async () => {
-
-    }
-
-    const rosterCreate = async (rosterName) => {
-        // isPresent = await rosterSearch(rosterName)
-        // isPresent && return null
-        // await axios.put("http://localhost:8080/api/v1/rostercreate", rosterName)
-
-    }
-
-    const rosterUpdate = () => {
-        return null
-    }
-
-    const rosterDelete = () => {
-        return null
-    }
 
     return (
       <>
-          <div className="Roster">
-              <div>원정대 등록</div>
-              <input className={"border"}></input>
-              <button className={"hover:cursor-pointer border"}>버튼</button>
-              {rosterList.map((item, index) => {
-                  return (
-                      <div key={index}>
-                          {item.roster}
-                      </div>
-                  )
-              })}
-              <div>
-              </div>
-          </div>
+          <Roster/>
           <div>캐릭터 등록</div>
           <input className={"border"}></input>
           <button className={"hover:cursor-pointer border"}>버튼</button>
@@ -98,7 +51,7 @@ function App() {
                           <input
                               type={"checkbox"}
                               checked={raidSelect === index}
-                              onClick={()=>setRaidSelect(index)}
+                              onChange={()=>setRaidSelect(index)}
                           ></input>
                       </div>
                   )
@@ -107,6 +60,7 @@ function App() {
           <div className={"Party"}>
               <div>파티 리스트</div>
               {partyList.map((item, index)=>{
+
                   return (
                       <div key={index}>
                           {item.members.map((member, index) => {
@@ -115,7 +69,7 @@ function App() {
                                   <div key={index}>
                                       {<div className={"border"}>
                                       <div className="flex justify-between">
-                                          <div></div>
+                                          <div>{character.class}</div>
                                           <div>템랩 : {character.level}</div>
                                       </div>
                                       <div>
