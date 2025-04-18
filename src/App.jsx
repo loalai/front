@@ -13,9 +13,8 @@ const raidList = [
 ]
 
 
-const characters = {1:
-        {id: 1, roster: "샤프테드", name: "지는쪽은서포터가되는걸로", class: "홀리나이트", level: 1701.6, lopec: 1000, zloa: 1000}
-
+const characters = {
+    1: {id: 1, roster: "샤프테드", name: "지는쪽은서포터가되는걸로", class: "홀리나이트", level: 1701.6, lopec: 1000, zloa: 1000}
 }
 
 const partyList = [
@@ -26,22 +25,91 @@ const partyList = [
     }
 ]
 
+const rosters = []
 
 function App() {
     const [raidSelect, setRaidSelect] = useState(0)
-
+    const [rosterSelect, setRosterSelect] = useState("")
     const [selectRoster, setSelectRoster] = useState(0)
+    const [isDropdown, setIsDropdown] = useState(false)
+    const [rosterList, setRosterList] = useState(rosters)
+    const [characterName, setCharacterName] = useState("")
+    const [characterClass, setCharacterClass] = useState("")
+    const [characterLevel, setCharacterLevel] = useState(0)
+    const [characterLopec, setCharacterLopec] = useState(0)
+    const [characterZloa, setCharacterZloa] = useState(0)
 
-
-
-
+    const dropdownSelect = (roster) => {
+        setRosterSelect(roster)
+        setIsDropdown(false)
+    }
 
     return (
       <>
-          <Roster/>
+          <Roster rosterList={rosterList} setRosterList={setRosterList}/>
           <div>캐릭터 등록</div>
-          <input className={"border"}></input>
-          <button className={"hover:cursor-pointer border"}>버튼</button>
+          <div className={"flex gap-1"}>
+              원정대 :
+              <div>
+                  <div
+                    className={"border w-[179px] h-[26px]"}
+                    onClick={()=> setIsDropdown(!isDropdown)}
+                  >{rosterSelect}</div>
+                  {isDropdown && (rosterList.length === 0
+                      ?
+                      <div className={"bg-white"}>등록된 원정대가 없습니다.</div>
+                      :
+                      rosterList.map((item,index) => {
+                      return(
+                          <div
+                              key={index}
+                              onClick={() => dropdownSelect(item.roster)}
+                              className={` border cursor-pointer hover:bg-gray-200`}
+                          >{item.roster}</div>
+                      )
+                  }))}
+              </div>
+          </div>
+
+          <div className={"flex gap-1"}>
+              <p>캐릭터명 :</p><input
+              className={"border"}
+              onChange={(e) => setCharacterName(e.target.value)}
+              value={characterName}
+          />
+          </div>
+          <div className={"flex gap-1"}>
+              <p>클래스 :</p><input
+              className={"border"}
+              onChange={(e)=> setCharacterClass(e.target.value)}
+              value={characterClass}
+          />
+          </div>
+          <div className={"flex gap-1"}>
+              <p>템랩 :</p><input
+              className={"border"}
+              type={"number"}
+              onChange={(e)=> setCharacterLevel(e.target.value)}
+              value={characterLevel}
+          />
+          </div>
+          <div className={"flex gap-1"}>
+              <p>로펙 :</p><input
+              className={"border"}
+              type={"number"}
+              onChange={(e)=> setCharacterLopec(e.target.value)}
+              value={characterLopec}
+          />
+          </div>
+          <div className={"flex gap-1"}>
+              <p>즐로아 :</p><input
+              className={"border"}
+              type={"number"}
+              onChange={(e)=> setCharacterZloa(e.target.value)}
+              value={characterZloa}
+          />
+          </div>
+          <button className={"hover:cursor-pointer border"}>추가</button>
           <div>파티 등록</div>
           {
               raidList.map((item, index) => {
@@ -88,7 +156,6 @@ function App() {
                       </div>
                   )
               })}<div>
-
               </div>
               <div>
                   <div>1파티</div>

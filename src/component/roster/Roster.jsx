@@ -3,10 +3,10 @@ import {lai} from "../Api.js";
 import {RosterName} from "./component/RosterName.jsx";
 import {RosterAdd} from "./component/RosterAdd.jsx";
 
-const rosters = []
 
-export const Roster = () => {
-    const [rosterList, setRosterList] = useState(rosters)
+
+export const Roster = ({rosterList, setRosterList}) => {
+
     const [isRosterEdit, setIsRosterEdit] = useState([])
 
     useEffect( () => {
