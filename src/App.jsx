@@ -2,7 +2,7 @@ import './App.css'
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {Roster} from "./component/roster/Roster.jsx";
-import {Character} from "./component/Character.jsx";
+import {Character} from "./component/character/Character.jsx";
 
 const raidList = [
     "강습 : 멸망의 불꽃, 타르칼",

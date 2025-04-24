@@ -1,14 +1,15 @@
 import {useEffect, useState} from "react";
-import {lai} from "./Api.js";
+import {lai} from "../Api.js";
+import {CharacterList} from "./component/CharacterList.jsx";
 
 export const Character = ({rosterList}) => {
+    const [characterList, setCharacterList] = useState([])
+    const [rosterSelect, setRosterSelect] = useState("")
     const [characterName, setCharacterName] = useState("")
     const [characterClass, setCharacterClass] = useState("")
     const [characterLevel, setCharacterLevel] = useState(0)
     const [characterLopec, setCharacterLopec] = useState(0)
     const [characterZloa, setCharacterZloa] = useState(0)
-    const [rosterSelect, setRosterSelect] = useState("")
-    const [selectRoster, setSelectRoster] = useState(0)
     const [isDropdown, setIsDropdown] = useState(false)
 
     useEffect(() => {
@@ -21,20 +22,43 @@ export const Character = ({rosterList}) => {
     }
 
     const characterGet = async () => {
-        const res.data = await lai.get("character")
-
+        const { data } = await lai.get("character")
+        setCharacterList(data)
     }
 
-    const characterSearch = async () => {}
+    const characterSearch = async (name) => {
+        const { data } = await lai.get("character/search",{params:{characterName: name}})
+        return data
+    }
 
     const characterPost = async () =>{
-       await lai.post("/character",{})
+        if(rosterSelect === "" || characterName === "" || characterClass === "" || characterLevel === 0 || characterLopec === 0 || characterZloa === 0){
+            alert("입력값이 올바르지 않습니다.")
+            return
+        }
+
+        const search = await characterSearch(characterName)
+        if(search.length === 1){alert("이미 등록된 캐릭터 명입니다."); return}
+
+       await lai.post("/character",{
+           roster: rosterSelect,
+           name: characterName,
+           class: characterClass,
+           level: characterLevel,
+           lopec: characterLopec,
+           zloa: characterZloa,
+       })
+        await characterGet()
     }
 
-    const characterPut = async () =>{}
+    const characterPut = async () =>{
+        await lai.put("/character",{})
+    }
 
-    const characterDelete = async () =>{}
-
+    const characterDelete = async (id) =>{
+        await lai.delete("/character",{params:{_id:id}})
+        await characterGet()
+    }
 
     return (
         <>
@@ -99,7 +123,8 @@ export const Character = ({rosterList}) => {
                 value={characterZloa}
             />
             </div>
-            <button className={"hover:cursor-pointer border"}>추가</button>
+            <button className={"hover:cursor-pointer border"} onClick={() => characterPost()}>추가</button>
+            <CharacterList characterList={characterList}/>
         </>
     )
 }
