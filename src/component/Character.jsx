@@ -1,4 +1,5 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {lai} from "./Api.js";
 
 export const Character = ({rosterList}) => {
     const [characterName, setCharacterName] = useState("")
@@ -10,10 +11,30 @@ export const Character = ({rosterList}) => {
     const [selectRoster, setSelectRoster] = useState(0)
     const [isDropdown, setIsDropdown] = useState(false)
 
+    useEffect(() => {
+        characterGet()
+    },[])
+
     const dropdownSelect = (roster) => {
         setRosterSelect(roster)
         setIsDropdown(false)
     }
+
+    const characterGet = async () => {
+        const res.data = await lai.get("character")
+
+    }
+
+    const characterSearch = async () => {}
+
+    const characterPost = async () =>{
+       await lai.post("/character",{})
+    }
+
+    const characterPut = async () =>{}
+
+    const characterDelete = async () =>{}
+
 
     return (
         <>
