@@ -11,6 +11,7 @@ export const Character = ({rosterList}) => {
     const [characterLopec, setCharacterLopec] = useState(0)
     const [characterZloa, setCharacterZloa] = useState(0)
     const [isDropdown, setIsDropdown] = useState(false)
+    const [isCharacterEdit, setIsCharacterEdit] = useState([])
 
     useEffect(() => {
         characterGet()
@@ -23,6 +24,7 @@ export const Character = ({rosterList}) => {
 
     const characterGet = async () => {
         const { data } = await lai.get("character")
+        setIsCharacterEdit(new Array(data.length).fill(false))
         setCharacterList(data)
     }
 
@@ -49,16 +51,15 @@ export const Character = ({rosterList}) => {
            zloa: characterZloa,
        })
         await characterGet()
+        setRosterSelect("")
+        setCharacterName("")
+        setCharacterClass("")
+        setCharacterLevel(0)
+        setCharacterLopec(0)
+        setCharacterZloa(0)
     }
 
-    const characterPut = async () =>{
-        await lai.put("/character",{})
-    }
 
-    const characterDelete = async (id) =>{
-        await lai.delete("/character",{params:{_id:id}})
-        await characterGet()
-    }
 
     return (
         <>
@@ -103,7 +104,7 @@ export const Character = ({rosterList}) => {
                 <p>템랩 :</p><input
                 className={"border"}
                 type={"number"}
-                onChange={(e)=> setCharacterLevel(e.target.value)}
+                onChange={(e) => setCharacterLevel(parseFloat(e.target.value))}
                 value={characterLevel}
             />
             </div>
@@ -111,7 +112,7 @@ export const Character = ({rosterList}) => {
                 <p>로펙 :</p><input
                 className={"border"}
                 type={"number"}
-                onChange={(e)=> setCharacterLopec(e.target.value)}
+                onChange={(e) => setCharacterLopec(parseInt(e.target.value))}
                 value={characterLopec}
             />
             </div>
@@ -119,12 +120,17 @@ export const Character = ({rosterList}) => {
                 <p>즐로아 :</p><input
                 className={"border"}
                 type={"number"}
-                onChange={(e)=> setCharacterZloa(e.target.value)}
+                onChange={(e) => setCharacterZloa(parseInt(e.target.value))}
                 value={characterZloa}
             />
             </div>
             <button className={"hover:cursor-pointer border"} onClick={() => characterPost()}>추가</button>
-            <CharacterList characterList={characterList}/>
+            <CharacterList
+                characterList={characterList}
+                characterGet={characterGet}
+                isCharacterEdit={isCharacterEdit}
+                setIsCharacterEdit={setIsCharacterEdit}
+            />
         </>
     )
 }
